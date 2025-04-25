@@ -58,3 +58,25 @@ export const postUser = (req: Request, res: Response) => {
     });
 };
 
+// put user by id
+export const putUser = (req: Request, res: Response) => {
+    const userId = req.params.id;
+    const { name } = req.body;
+
+    if (!name) {
+        return res.status(400).json({ error: "Name is required" });
+    }
+
+    const sql = "UPDATE `character` SET name = ? WHERE id = ?";
+
+    db.query(sql, [name, userId], (err, result) => {
+        if (err) {
+            console.error("❌ Query Error:", err);
+            return res.status(500).json({ error: "Internal Server Error" });
+        }
+
+        console.log("✅ Updated:", result);
+        sendResponse(res, 200, "Character updated", { id: userId, name });
+    });
+};
+

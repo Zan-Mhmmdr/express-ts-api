@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getUserById, postUser, UserController } from "../controllers/userController";
+import { deleteUser, getUserById, postUser, putUser, UserController } from "../controllers/userController";
 
 const router = Router()
 
@@ -13,13 +13,7 @@ router.get("/:id", getUserById)
 router.post("/", postUser)
 
 // PUT /users/
-router.put("/", (req, res) => {
-    res.send("PUT request to the homepage")
-})
+router.put("/:id", putUser)
 
-// PATCH /users/
-router.delete("/", (req, res) => {
-    res.send("DELETE request to the homepage")
-})
 
 export default router
