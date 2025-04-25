@@ -15,5 +15,8 @@ router.post("/", postUser)
 // PUT /users/
 router.put("/:id", putUser)
 
+// DELETE /users/:id
+router.delete("/:id", deleteUser)
+
 
 export default router

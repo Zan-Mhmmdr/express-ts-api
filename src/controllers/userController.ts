@@ -80,3 +80,18 @@ export const putUser = (req: Request, res: Response) => {
     });
 };
 
+// Delete user by id
+export const deleteUser = (req: Request, res: Response) => {
+    const userId = req.params.id
+    const sql = "DELETE FROM `character` WHERE id = ?"
+
+    db.query(sql, [userId], (err, result) => {
+        if (err) {
+            console.error("❌ Query Error:", err)
+            return res.status(500).json({ error: "Internal Server Error" })
+        }
+
+        console.log("✅ Deleted:", result)
+        sendResponse(res, 200, "Character deleted", { id: userId })
+    })
+}
